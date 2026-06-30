@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GoTyme — Company Roadmap Jul 2026–Jun 2027</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bg: #F7F6F3; --surface: #FFFFFF;
+  --border: #E2E0D8; --border-dark: #C8C5BB;
+  --text-primary: #1A1917; --text-secondary: #5C5A54; --text-muted: #9A9790;
+  --c-corp: #3C3489;  --c-corp-bg: #EEEDFE;  --c-corp-bd: #AFA9EC;
+  --c-train: #8B4513;  --c-train-bg: #FFF0E6;  --c-train-bd: #E8965A;
+  --c-goals: #0A6B55;  --c-goals-bg: #E0F5EF;  --c-goals-bd: #3DB891;
+  --c-perf: #0C447C;   --c-perf-bg: #E6F1FB;   --c-perf-bd: #5A9FD4;
+  --c-visit: #7A5C00;  --c-visit-bg: #FFF8DC;   --c-visit-bd: #D4A017;
+  --c-prod: #8B0000;   --c-prod-bg: #FDECEA;    --c-prod-bd: #E05A5A;
+  --c-other: #4A4A4A;  --c-other-bg: #F2F2F2;   --c-other-bd: #AAAAAA;
+  --c-ph: #0F6E56;    --c-ph-bg: #E1F5EE;   --c-ph-bd: #5DCAA5;
+  --lw: 130px;
+}
+body { font-family: var(--font); background: var(--bg); color: var(--text-primary); min-height: 100vh; }
+.page-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 14px 24px; position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.page-header-left { display: flex; flex-direction: column; gap: 2px; }
+.page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.page-title { font-size: 16px; font-weight: 600; }
+.page-subtitle { font-size: 11px; color: var(--text-secondary); }
+.header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+.leg { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
+.leg-pip { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;
+  cursor: pointer; border: 1px solid var(--border-dark); background: var(--surface);
+  color: var(--text-primary); transition: background 0.12s; white-space: nowrap;
+}
+.btn:hover { background: #F0EEE8; }
+.btn.active { background: #1A1917; color: #fff; border-color: #1A1917; }
+.btn-export { background: #0F6E56; color: #fff; border-color: #0F6E56; }
+.btn-export:hover { background: #0a5540; }
+.btn-primary { background: #1A1917; color: #fff; border-color: #1A1917; }
+.btn-primary:hover { background: #333; }
+.btn-add-event { background: #E84C1E; color: #fff; border-color: #E84C1E; font-weight: 600; }
+.btn-add-event:hover { background: #c73d17; }
+.view-tabs {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 24px; display: flex; align-items: center;
+  position: sticky; top: 62px; z-index: 190;
+}
+.view-tab {
+  padding: 10px 18px; font-size: 12px; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.12s, border-color 0.12s; white-space: nowrap;
+}
+.view-tab:hover { color: var(--text-primary); }
+.view-tab.active { color: var(--text-primary); border-bottom-color: #1A1917; }
+.quarter-tabs {
+  display: none; padding: 8px 24px; background: var(--bg);
+  border-bottom: 1px solid var(--border); gap: 6px;
+  position: sticky; top: 101px; z-index: 180; flex-wrap: wrap; align-items: center;
+}
+.quarter-tabs.visible { display: flex; }
+.qtab {
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 500;
+  cursor: pointer; border: 1px solid var(--border-dark); background: var(--surface);
+  color: var(--text-secondary); transition: all 0.12s;
+}
+.qtab:hover { background: #F0EEE8; }
+.qtab.active { background: #1A1917; color: #fff; border-color: #1A1917; }
+.edit-banner {
+  display: none; background: #FAEEDA; border-bottom: 1px solid #EF9F27;
+  padding: 7px 24px; font-size: 11px; color: #854F0B; align-items: center; gap: 6px;
+}
+.edit-banner.visible { display: flex; }
+.view-panel { display: none; }
+.view-panel.active { display: block; }
+.quarter-panel { display: none; }
+.quarter-panel.qactive { display: block; }
+.scroll-wrapper { overflow-x: auto; padding: 20px 24px 40px; }
+.timeline-grid {
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  background: var(--surface); display: grid;
+}
+.mg { grid-template-columns: var(--lw) repeat(12, minmax(136px, 1fr)); min-width: calc(var(--lw) + 12*136px); }
+.wg { grid-template-columns: var(--lw) repeat(13, minmax(78px, 1fr)); min-width: calc(var(--lw) + 13*78px); }
+.corner { background: var(--bg); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.ch {
+  background: var(--bg); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 7px 5px; text-align: center;
+}
+.ch:last-child { border-right: none; }
+.ch.qm, .ch.ms { border-left: 2px solid var(--border-dark); background: #ECEAE4; }
+.hm { font-size: 11px; font-weight: 600; color: var(--text-primary); display: block; }
+.hs { font-size: 9px; color: var(--text-muted); display: block; margin-top: 1px; }
+.sd {
+  grid-column: 1 / -1; background: #ECEAE4;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 4px 12px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+}
+.lr { display: contents; }
+.ll {
+  background: var(--surface); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 7px 8px; position: sticky; left: 0; z-index: 10;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.ln { font-size: 11px; font-weight: 600; }
+.ls { font-size: 9px; color: var(--text-muted); }
+.lc {
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 4px 3px; display: flex; flex-direction: column; gap: 2px; min-height: 52px; position: relative;
+}
+.lc:last-child { border-right: none; }
+.lr:last-child .ll, .lr:last-child .lc { border-bottom: none; }
+.lc.qm, .lc.ms { border-left: 2px solid var(--border-dark); }
+.ev {
+  border-radius: 3px; padding: 2px 5px; font-size: 9px; line-height: 1.35;
+  border-left-width: 2px; border-left-style: solid; position: relative; cursor: default; overflow: hidden;
+}
+.ev .ev-date { font-size: 8px; opacity: 0.75; display: block; margin-top: 1px; }
+.ev.ph    { background: var(--c-ph-bg);    color: var(--c-ph);    border-color: var(--c-ph-bd); }
+.ev.corp  { background: var(--c-corp-bg);  color: var(--c-corp);  border-color: var(--c-corp-bd); }
+.ev.train { background: var(--c-train-bg); color: var(--c-train); border-color: var(--c-train-bd); }
+.ev.goals { background: var(--c-goals-bg); color: var(--c-goals); border-color: var(--c-goals-bd); }
+.ev.perf  { background: var(--c-perf-bg);  color: var(--c-perf);  border-color: var(--c-perf-bd); }
+.ev.visit { background: var(--c-visit-bg); color: var(--c-visit); border-color: var(--c-visit-bd); }
+.ev.prod  { background: var(--c-prod-bg);  color: var(--c-prod);  border-color: var(--c-prod-bd); }
+.ev.other { background: var(--c-other-bg); color: var(--c-other); border-color: var(--c-other-bd); }
+.ev[data-tip]:hover::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 4px); left: 0; z-index: 999;
+  background: #1A1917; color: #fff; font-size: 10px; line-height: 1.4;
+  padding: 5px 8px; border-radius: 5px; white-space: pre-wrap;
+  width: max-content; max-width: 220px; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+body.edit-mode .ev { cursor: pointer; }
+body.edit-mode .ev:hover { opacity: 0.82; outline: 2px solid #1A1917; outline-offset: 1px; }
+.db {
+  display: none; position: absolute; top: 1px; right: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(0,0,0,0.2); color: #fff; font-size: 9px; line-height: 12px;
+  text-align: center; cursor: pointer; font-weight: 700;
+}
+body.edit-mode .ev:hover .db { display: block; }
+.db:hover { background: #c0392b; }
+.ab {
+  display: none; align-items: center; justify-content: center;
+  border: 1px dashed var(--border-dark); border-radius: 3px;
+  padding: 2px; font-size: 14px; color: var(--text-muted);
+  cursor: pointer; background: transparent; line-height: 1; transition: background 0.1s;
+}
+.ab:hover { background: #F0EEE8; color: var(--text-primary); }
+body.edit-mode .ab { display: flex; }
+
+/* ── Edit modal ── */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35); z-index: 500; align-items: center; justify-content: center;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--surface); border-radius: 12px; padding: 22px; width: 400px; max-width: 94vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18); display: flex; flex-direction: column; gap: 14px;
+}
+.modal h3 { font-size: 14px; font-weight: 600; }
+.modal label { font-size: 11px; color: var(--text-secondary); display: block; margin-bottom: 3px; }
+.modal input[type=text], .modal input[type=date], .modal select {
+  width: 100%; padding: 7px 9px; border: 1px solid var(--border-dark);
+  border-radius: 6px; font-size: 12px; font-family: var(--font); color: var(--text-primary);
+  background: var(--surface); outline: none;
+}
+.modal input:focus, .modal select:focus { border-color: #1A1917; }
+.modal-date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-actions .btn { padding: 7px 14px; font-size: 12px; }
+
+/* ── Public suggestion form ── */
+.ef-backdrop {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45); z-index: 600; align-items: center; justify-content: center;
+}
+.ef-backdrop.open { display: flex; }
+.ef-modal {
+  background: #fff; border-radius: 14px; padding: 28px 28px 22px; width: 480px; max-width: 95vw;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.22); display: flex; flex-direction: column; gap: 14px;
+  max-height: 90vh; overflow-y: auto;
+}
+.ef-modal h2 { font-size: 15px; font-weight: 700; color: #1A1917; border-bottom: 1px solid #E2E0D8; padding-bottom: 10px; }
+.ef-modal .ef-subtitle { font-size: 11px; color: #5C5A54; margin-top: -8px; }
+.ef-row { display: flex; flex-direction: column; gap: 4px; }
+.ef-row label { font-size: 11px; font-weight: 600; color: #5C5A54; }
+.ef-row input, .ef-row select, .ef-row textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid #C8C5BB;
+  border-radius: 7px; font-size: 12px; font-family: system-ui, sans-serif; color: #1A1917;
+  background: #fff; outline: none; box-sizing: border-box;
+}
+.ef-row input:focus, .ef-row select:focus, .ef-row textarea:focus { border-color: #1A1917; }
+.ef-row textarea { resize: vertical; min-height: 70px; }
+.ef-row input[readonly] { background: #F7F6F3; color: #9A9790; }
+.ef-date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ef-actions { display: flex; gap: 8px; justify-content: flex-end; padding-top: 6px; border-top: 1px solid #E2E0D8; }
+.ef-actions .btn { padding: 8px 16px; font-size: 12px; }
+.ef-success { display: none; flex-direction: column; align-items: center; gap: 10px; padding: 20px 0; text-align: center; }
+.ef-success .ef-check { font-size: 36px; }
+.ef-success p { font-size: 13px; color: #1A1917; font-weight: 600; }
+.ef-success small { font-size: 11px; color: #5C5A54; }
+
+.footer-note { padding: 12px 24px 28px; font-size: 11px; color: var(--text-muted); line-height: 1.7; max-width: 960px; }
+.footer-note strong { color: var(--text-secondary); }
+</style>
+<script src="chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/js/recordConsoleEvents.js"></script></head>
+<body class="">
+<header class="page-header">
+  <div class="page-header-left">
+    <span class="page-eyebrow">GoTyme · Leadership Visibility Calendar</span>
+    <span class="page-title">Company Roadmap — Jul 2026 to Jun 2027</span>
+    <span class="page-subtitle">South Africa · Philippines · Vietnam &nbsp;·&nbsp; Leadership awareness &nbsp;·&nbsp; Update as events are confirmed</span>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-add-event" onclick="openEventForm()">+ Add an event</button>
+    <div class="legend">
+      <div class="leg"><div class="leg-pip" style="background:var(--c-corp-bd)"></div>Company Events / All Hands</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-train-bd)"></div>Training</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-goals-bd)"></div>Goal Setting</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-perf-bd)"></div>Performance Appraisals</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-visit-bd)"></div>Site Visits</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-prod-bd)"></div>Major Product Milestones &amp; Launches</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-other-bd)"></div>Other</div>
+      <div class="leg"><div class="leg-pip" style="background:var(--c-ph-bd)"></div>Public Holiday</div>
+    </div>
+    <button class="btn" id="etb" onclick="toggleEdit()">✏️ Edit mode</button>
+    <button class="btn btn-export" onclick="exportHTML()">⬇ Save file</button>
+  </div>
+</header>
+
+<div class="view-tabs">
+  <div class="view-tab" onclick="switchView('monthly')">📅 Monthly overview</div>
+  <div class="view-tab active" onclick="switchView('weekly')">🗓 Weekly drill-down</div>
+</div>
+<div class="quarter-tabs visible" id="qtabs">
+  <span style="font-size:11px;color:var(--text-muted);margin-right:4px;">Quarter:</span>
+  <div class="qtab active" onclick="switchQ(event,'q3')">Q3 2026 — Jul–Sep</div>
+  <div class="qtab" onclick="switchQ(event,'q4')">Q4 2026 — Oct–Dec</div>
+  <div class="qtab" onclick="switchQ(event,'q1')">Q1 2027 — Jan–Mar</div>
+  <div class="qtab" onclick="switchQ(event,'q2')">Q2 2027 — Apr–Jun</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     MONTHLY VIEW
+═══════════════════════════════════════════════════════ -->
+<div class="view-panel" id="panel-monthly"><div class="scroll-wrapper"><div class="timeline-grid mg" id="mgrid">
+<div class="corner"></div>
+<div class="ch qm" data-mi="0"><span class="hm">Jul</span><span class="hs">2026 · Q3</span></div>
+<div class="ch" data-mi="1"><span class="hm">Aug</span><span class="hs">2026</span></div>
+<div class="ch" data-mi="2"><span class="hm">Sep</span><span class="hs">2026</span></div>
+<div class="ch qm" data-mi="3"><span class="hm">Oct</span><span class="hs">2026 · Q4</span></div>
+<div class="ch" data-mi="4"><span class="hm">Nov</span><span class="hs">2026</span></div>
+<div class="ch" data-mi="5"><span class="hm">Dec</span><span class="hs">2026</span></div>
+<div class="ch qm" data-mi="6"><span class="hm">Jan</span><span class="hs">2027 · Q1</span></div>
+<div class="ch" data-mi="7"><span class="hm">Feb</span><span class="hs">2027</span></div>
+<div class="ch" data-mi="8"><span class="hm">Mar</span><span class="hs">2027</span></div>
+<div class="ch qm" data-mi="9"><span class="hm">Apr</span><span class="hs">2027 · Q2</span></div>
+<div class="ch" data-mi="10"><span class="hm">May</span><span class="hs">2027</span></div>
+<div class="ch" data-mi="11"><span class="hm">Jun</span><span class="hs">2027</span></div>
+<div class="sd">By country</div>
+<div class="lr" data-row="all-countries"><div class="ll"><span class="ln">All Countries</span><span class="ls">Group-wide</span></div><div class="lc qm" data-mi="0"></div><div class="lc" data-mi="1"><div class="ev corp" data-tip="Manila" data-start="2026-08-04" data-end="2026-08-06">QBR Week<span class="ev-date">4 Aug–6 Aug</span></div></div><div class="lc" data-mi="2"></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"></div><div class="lc" data-mi="5"></div><div class="lc qm" data-mi="6"></div><div class="lc" data-mi="7"></div><div class="lc" data-mi="8"></div><div class="lc qm" data-mi="9"></div><div class="lc" data-mi="10"></div><div class="lc" data-mi="11"></div></div>
+<div class="lr" data-row="south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc qm" data-mi="0"><div class="ev corp">ZA team planning (tbc)</div></div><div class="lc" data-mi="1"><div class="ev corp">Women's Day initiative</div></div><div class="lc" data-mi="2"></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"></div><div class="lc" data-mi="5"><div class="ev corp">ZA office close-down (tbc)</div></div><div class="lc qm" data-mi="6"><div class="ev corp">ZA return to office (tbc)</div></div><div class="lc" data-mi="7"></div><div class="lc" data-mi="8"></div><div class="lc qm" data-mi="9"></div><div class="lc" data-mi="10"></div><div class="lc" data-mi="11"></div></div>
+<div class="lr" data-row="philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc qm" data-mi="0"></div><div class="lc" data-mi="1"></div><div class="lc" data-mi="2"></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"><div class="ev corp">PH year-end party (tbc)</div></div><div class="lc" data-mi="5"></div><div class="lc qm" data-mi="6"></div><div class="lc" data-mi="7"></div><div class="lc" data-mi="8"></div><div class="lc qm" data-mi="9"></div><div class="lc" data-mi="10"></div><div class="lc" data-mi="11"></div></div>
+<div class="lr" data-row="vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc qm" data-mi="0"><div class="ev corp">VN team workshop (tbc)</div></div><div class="lc" data-mi="1"></div><div class="lc" data-mi="2"></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"></div><div class="lc" data-mi="5"><div class="ev perf" data-tip="Tet planning — leadership prep for Jan/Feb capacity reduction">Tet planning — leadership prep</div></div><div class="lc qm" data-mi="6"><div class="ev perf" data-tip="VN capacity significantly reduced during Tet — plan accordingly">Reduced VN capacity</div></div><div class="lc" data-mi="7"><div class="ev corp">VN return &amp; kickoff</div></div><div class="lc" data-mi="8"></div><div class="lc qm" data-mi="9"></div><div class="lc" data-mi="10"></div><div class="lc" data-mi="11"></div></div>
+<div class="sd">Public holidays by country</div>
+<div class="lr" data-row="ph-south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc qm" data-mi="0"></div><div class="lc" data-mi="1"><div class="ev ph">Women's Day (9 Aug)</div></div><div class="lc" data-mi="2"><div class="ev ph">Heritage Day (24 Sep)</div></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"></div><div class="lc" data-mi="5"><div class="ev ph">Day of Reconciliation (16 Dec)</div><div class="ev ph">Christmas Day (25 Dec)</div><div class="ev ph">Day of Goodwill (26 Dec)</div></div><div class="lc qm" data-mi="6"><div class="ev ph">New Year's Day (1 Jan)</div></div><div class="lc" data-mi="7"></div><div class="lc" data-mi="8"><div class="ev ph">Human Rights Day (21 Mar)</div></div><div class="lc qm" data-mi="9"><div class="ev ph">Good Friday (2 Apr)</div><div class="ev ph">Family Day (5 Apr)</div><div class="ev ph">Freedom Day (27 Apr)</div></div><div class="lc" data-mi="10"><div class="ev ph">Workers' Day (1 May)</div></div><div class="lc" data-mi="11"><div class="ev ph">Youth Day (16 Jun)</div></div></div>
+<div class="lr" data-row="ph-philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc qm" data-mi="0"><div class="ev ph">Independence Day observed (tbc)</div></div><div class="lc" data-mi="1"><div class="ev ph">Ninoy Aquino Day (21 Aug)</div><div class="ev ph">National Heroes Day (25 Aug)</div></div><div class="lc" data-mi="2"></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"><div class="ev ph">All Saints' Day (1 Nov)</div><div class="ev ph">All Souls' Day (2 Nov)</div><div class="ev ph">Bonifacio Day (30 Nov)</div></div><div class="lc" data-mi="5"><div class="ev ph">Immaculate Conception (8 Dec)</div><div class="ev ph">Christmas Day (25 Dec)</div><div class="ev ph">Rizal Day (30 Dec)</div><div class="ev ph">New Year's Eve (31 Dec)</div></div><div class="lc qm" data-mi="6"><div class="ev ph">New Year's Day (1 Jan)</div><div class="ev ph">Chinese New Year (tbc)</div></div><div class="lc" data-mi="7"><div class="ev ph">EDSA Anniv. (25 Feb)</div></div><div class="lc" data-mi="8"></div><div class="lc qm" data-mi="9"><div class="ev ph">Holy Thursday (tbc)</div><div class="ev ph">Good Friday (tbc)</div><div class="ev ph">Araw ng Kagitingan (9 Apr)</div></div><div class="lc" data-mi="10"><div class="ev ph">Labour Day (1 May)</div></div><div class="lc" data-mi="11"><div class="ev ph">Independence Day (12 Jun)</div></div></div>
+<div class="lr" data-row="ph-vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc qm" data-mi="0"></div><div class="lc" data-mi="1"></div><div class="lc" data-mi="2"><div class="ev ph">National Day (2 Sep)</div></div><div class="lc qm" data-mi="3"></div><div class="lc" data-mi="4"></div><div class="lc" data-mi="5"><div class="ev ph">New Year's Eve (31 Dec)</div></div><div class="lc qm" data-mi="6"><div class="ev ph">New Year's Day (1 Jan)</div><div class="ev ph" data-tip="Tet Nguyen Dan — expect late January 2027">Tet begins (tbc ~late Jan)</div></div><div class="lc" data-mi="7"><div class="ev ph" data-tip="Tet holiday period — typically 1-2 weeks">Tet holiday continues (tbc)</div></div><div class="lc" data-mi="8"><div class="ev ph" data-tip="Hung Kings' Commemoration — date varies annually">Hung Kings' Day (tbc)</div></div><div class="lc qm" data-mi="9"><div class="ev ph">Reunification Day (30 Apr)</div><div class="ev ph">Labour Day (1 May)</div></div><div class="lc" data-mi="10"></div><div class="lc" data-mi="11"></div></div>
+</div></div></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     WEEKLY VIEW
+═══════════════════════════════════════════════════════ -->
+<div class="view-panel active" id="panel-weekly">
+
+<!-- Q3 2026 Jul–Sep -->
+<div class="quarter-panel qactive" id="qp-q3"><div class="scroll-wrapper"><div class="timeline-grid wg">
+<div class="corner"></div>
+<div class="ch ms" data-wi="0"><span class="hm">W27</span><span class="hs">Jul 1</span></div>
+<div class="ch" data-wi="1"><span class="hm">W28</span><span class="hs">Jul 8</span></div>
+<div class="ch" data-wi="2"><span class="hm">W29</span><span class="hs">Jul 15</span></div>
+<div class="ch" data-wi="3"><span class="hm">W30</span><span class="hs">Jul 22</span></div>
+<div class="ch ms" data-wi="4"><span class="hm">W31</span><span class="hs">Aug 3</span></div>
+<div class="ch" data-wi="5"><span class="hm">W32</span><span class="hs">Aug 10</span></div>
+<div class="ch" data-wi="6"><span class="hm">W33</span><span class="hs">Aug 17</span></div>
+<div class="ch" data-wi="7"><span class="hm">W34</span><span class="hs">Aug 24</span></div>
+<div class="ch ms" data-wi="8"><span class="hm">W36</span><span class="hs">Sep 1</span></div>
+<div class="ch" data-wi="9"><span class="hm">W37</span><span class="hs">Sep 8</span></div>
+<div class="ch" data-wi="10"><span class="hm">W38</span><span class="hs">Sep 15</span></div>
+<div class="ch" data-wi="11"><span class="hm">W39</span><span class="hs">Sep 22</span></div>
+<div class="ch" data-wi="12"><span class="hm">W40</span><span class="hs">Sep 29</span></div>
+<div class="sd">By country</div>
+<div class="lr" data-row="all-countries"><div class="ll"><span class="ln">All Countries</span><span class="ls">Group-wide</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"><div class="ev corp" data-tip="Manila" data-start="2026-08-04" data-end="2026-08-06">QBR Week<span class="ev-date">4 Aug–6 Aug</span></div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"><div class="ev corp" data-tip="ZA team planning session (tbc)">ZA team planning (tbc)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"><div class="ev corp" data-tip="Women's Day internal initiative / event">Women's Day event</div></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"><div class="ev corp" data-tip="Vietnam team workshop (tbc)">VN team workshop (tbc)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="sd">Public holidays by country</div>
+<div class="lr" data-row="ph-south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="Women's Day — public holiday (9 Aug)">Women's Day (9 Aug)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"><div class="ev ph" data-tip="Heritage Day — public holiday (24 Sep)">Heritage Day (24 Sep)</div></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"><div class="ev ph" data-tip="Ninoy Aquino Day (21 Aug)">Ninoy Aquino Day (21 Aug)</div></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"><div class="ev ph" data-tip="National Heroes Day (25 Aug)">National Heroes Day (25 Aug)</div></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"><div class="ev ph" data-tip="Vietnam National Day (2 Sep)">National Day (2 Sep)</div></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+</div></div></div>
+
+<!-- Q4 2026 Oct–Dec -->
+<div class="quarter-panel" id="qp-q4"><div class="scroll-wrapper"><div class="timeline-grid wg">
+<div class="corner"></div>
+<div class="ch ms" data-wi="0"><span class="hm">W41</span><span class="hs">Oct 5</span></div>
+<div class="ch" data-wi="1"><span class="hm">W42</span><span class="hs">Oct 12</span></div>
+<div class="ch" data-wi="2"><span class="hm">W43</span><span class="hs">Oct 19</span></div>
+<div class="ch" data-wi="3"><span class="hm">W44</span><span class="hs">Oct 26</span></div>
+<div class="ch ms" data-wi="4"><span class="hm">W45</span><span class="hs">Nov 2</span></div>
+<div class="ch" data-wi="5"><span class="hm">W46</span><span class="hs">Nov 9</span></div>
+<div class="ch" data-wi="6"><span class="hm">W47</span><span class="hs">Nov 16</span></div>
+<div class="ch" data-wi="7"><span class="hm">W48</span><span class="hs">Nov 23</span></div>
+<div class="ch ms" data-wi="8"><span class="hm">W49</span><span class="hs">Dec 1</span></div>
+<div class="ch" data-wi="9"><span class="hm">W50</span><span class="hs">Dec 8</span></div>
+<div class="ch" data-wi="10"><span class="hm">W51</span><span class="hs">Dec 15</span></div>
+<div class="ch" data-wi="11"><span class="hm">W52</span><span class="hs">Dec 22</span></div>
+<div class="ch" data-wi="12"><span class="hm">W53</span><span class="hs">Dec 29</span></div>
+<div class="sd">By country</div>
+<div class="lr" data-row="all-countries"><div class="ll"><span class="ln">All Countries</span><span class="ls">Group-wide</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"><div class="ev corp" data-tip="ZA office close-down (tbc)">ZA close-down (tbc)</div></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"><div class="ev corp">PH year-end party (tbc)</div></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"><div class="ev perf" data-tip="Tet planning — leadership prep for Jan/Feb capacity reduction">Tet planning — leadership prep</div></div></div>
+<div class="sd">Public holidays by country</div>
+<div class="lr" data-row="ph-south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"><div class="ev ph" data-tip="Day of Reconciliation (16 Dec)">Reconciliation Day (16 Dec)</div></div><div class="lc" data-wi="11"><div class="ev ph">Christmas Day (25 Dec)</div><div class="ev ph">Day of Goodwill (26 Dec)</div></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="All Saints' Day (1 Nov) and All Souls' Day (2 Nov)">All Saints' &amp; All Souls' (1–2 Nov)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"><div class="ev ph">Bonifacio Day (30 Nov)</div></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"><div class="ev ph">Immaculate Conception (8 Dec)</div></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"><div class="ev ph">Christmas Day (25 Dec)</div><div class="ev ph">Rizal Day (30 Dec)</div></div><div class="lc" data-wi="12"><div class="ev ph">New Year's Eve (31 Dec)</div></div></div>
+<div class="lr" data-row="ph-vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"><div class="ev ph">New Year's Eve (31 Dec)</div></div></div>
+</div></div></div>
+
+<!-- Q1 2027 Jan–Mar -->
+<div class="quarter-panel" id="qp-q1"><div class="scroll-wrapper"><div class="timeline-grid wg">
+<div class="corner"></div>
+<div class="ch ms" data-wi="0"><span class="hm">W1</span><span class="hs">Jan 4</span></div>
+<div class="ch" data-wi="1"><span class="hm">W2</span><span class="hs">Jan 11</span></div>
+<div class="ch" data-wi="2"><span class="hm">W3</span><span class="hs">Jan 18</span></div>
+<div class="ch" data-wi="3"><span class="hm">W4</span><span class="hs">Jan 25</span></div>
+<div class="ch ms" data-wi="4"><span class="hm">W5</span><span class="hs">Feb 1</span></div>
+<div class="ch" data-wi="5"><span class="hm">W6</span><span class="hs">Feb 8</span></div>
+<div class="ch" data-wi="6"><span class="hm">W7</span><span class="hs">Feb 15</span></div>
+<div class="ch" data-wi="7"><span class="hm">W8</span><span class="hs">Feb 22</span></div>
+<div class="ch ms" data-wi="8"><span class="hm">W9</span><span class="hs">Mar 1</span></div>
+<div class="ch" data-wi="9"><span class="hm">W10</span><span class="hs">Mar 8</span></div>
+<div class="ch" data-wi="10"><span class="hm">W11</span><span class="hs">Mar 15</span></div>
+<div class="ch" data-wi="11"><span class="hm">W12</span><span class="hs">Mar 22</span></div>
+<div class="ch" data-wi="12"><span class="hm">W13</span><span class="hs">Mar 29</span></div>
+<div class="sd">By country</div>
+<div class="lr" data-row="all-countries"><div class="ll"><span class="ln">All Countries</span><span class="ls">Group-wide</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"><div class="ev corp">ZA return to office (tbc)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"><div class="ev perf" data-tip="VN capacity significantly reduced during Tet — plan accordingly">Reduced VN capacity</div></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"><div class="ev corp" data-tip="VN return-to-office and 2027 kickoff">VN return &amp; kickoff</div></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="sd">Public holidays by country</div>
+<div class="lr" data-row="ph-south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"><div class="ev ph">New Year's Day (1 Jan)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"><div class="ev ph" data-tip="Human Rights Day (21 Mar)">Human Rights Day (21 Mar)</div></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"><div class="ev ph">New Year's Day (1 Jan)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"><div class="ev ph" data-tip="Chinese New Year — exact date shifts annually">Chinese New Year (tbc)</div></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"><div class="ev ph" data-tip="EDSA People Power Anniversary (25 Feb)">EDSA Anniv. (25 Feb)</div></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"><div class="ev ph">New Year's Day (1 Jan)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"><div class="ev ph" data-tip="Tet Nguyen Dan — expect late January 2027">Tet begins (tbc ~late Jan)</div></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="Tet holiday period — typically 1-2 weeks">Tet holiday continues (tbc)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"><div class="ev ph" data-tip="Hung Kings' Commemoration — date varies annually">Hung Kings' Day (tbc)</div></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+</div></div></div>
+
+<!-- Q2 2027 Apr–Jun -->
+<div class="quarter-panel" id="qp-q2"><div class="scroll-wrapper"><div class="timeline-grid wg">
+<div class="corner"></div>
+<div class="ch ms" data-wi="0"><span class="hm">W14</span><span class="hs">Apr 1</span></div>
+<div class="ch" data-wi="1"><span class="hm">W15</span><span class="hs">Apr 7</span></div>
+<div class="ch" data-wi="2"><span class="hm">W16</span><span class="hs">Apr 14</span></div>
+<div class="ch" data-wi="3"><span class="hm">W17</span><span class="hs">Apr 22</span></div>
+<div class="ch ms" data-wi="4"><span class="hm">W18</span><span class="hs">May 3</span></div>
+<div class="ch" data-wi="5"><span class="hm">W19</span><span class="hs">May 10</span></div>
+<div class="ch" data-wi="6"><span class="hm">W20</span><span class="hs">May 17</span></div>
+<div class="ch" data-wi="7"><span class="hm">W21</span><span class="hs">May 24</span></div>
+<div class="ch ms" data-wi="8"><span class="hm">W22</span><span class="hs">Jun 1</span></div>
+<div class="ch" data-wi="9"><span class="hm">W23</span><span class="hs">Jun 8</span></div>
+<div class="ch" data-wi="10"><span class="hm">W24</span><span class="hs">Jun 15</span></div>
+<div class="ch" data-wi="11"><span class="hm">W25</span><span class="hs">Jun 22</span></div>
+<div class="ch" data-wi="12"><span class="hm">W26</span><span class="hs">Jun 29</span></div>
+<div class="sd">By country</div>
+<div class="lr" data-row="all-countries"><div class="ll"><span class="ln">All Countries</span><span class="ls">Group-wide</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="sd">Public holidays by country</div>
+<div class="lr" data-row="ph-south-africa"><div class="ll"><span class="ln">South Africa</span><span class="ls">ZA office</span></div><div class="lc ms" data-wi="0"><div class="ev ph">Good Friday (2 Apr)</div></div><div class="lc" data-wi="1"><div class="ev ph" data-tip="Family Day / Easter Monday (5 Apr)">Family Day (5 Apr)</div></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"><div class="ev ph" data-tip="Freedom Day (27 Apr)">Freedom Day (27 Apr)</div></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="Workers' Day (1 May)">Workers' Day (1 May)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"><div class="ev ph" data-tip="Youth Day (16 Jun)">Youth Day (16 Jun)</div></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-philippines"><div class="ll"><span class="ln">Philippines</span><span class="ls">PH office</span></div><div class="lc ms" data-wi="0"></div><div class="lc" data-wi="1"><div class="ev ph" data-tip="Holy Thursday, Good Friday — Easter dates vary">Holy Thu / Good Fri (tbc)</div></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"><div class="ev ph" data-tip="Araw ng Kagitingan / Day of Valour (9 Apr)">Araw ng Kagitingan (9 Apr)</div></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="Labour Day (1 May)">Labour Day (1 May)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"><div class="ev ph" data-tip="Independence Day (12 Jun)">Independence Day (12 Jun)</div></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+<div class="lr" data-row="ph-vietnam"><div class="ll"><span class="ln">Vietnam</span><span class="ls">VN office</span></div><div class="lc ms" data-wi="0"><div class="ev ph" data-tip="Reunification Day (30 Apr)">Reunification Day (30 Apr)</div></div><div class="lc" data-wi="1"></div><div class="lc" data-wi="2"></div><div class="lc" data-wi="3"></div><div class="lc ms" data-wi="4"><div class="ev ph" data-tip="Labour Day (1 May)">Labour Day (1 May)</div></div><div class="lc" data-wi="5"></div><div class="lc" data-wi="6"></div><div class="lc" data-wi="7"></div><div class="lc ms" data-wi="8"></div><div class="lc" data-wi="9"></div><div class="lc" data-wi="10"></div><div class="lc" data-wi="11"></div><div class="lc" data-wi="12"></div></div>
+</div></div></div>
+
+</div><!-- end panel-weekly -->
+
+<div class="footer-note">
+  <strong>How to use:</strong> Toggle between <em>Monthly overview</em> (full-year scan) and <em>Weekly drill-down</em> (quarter-by-quarter detail).
+  Hover any event chip to see its full description. Use <em>Edit mode</em> to add, edit, or delete events — start/end dates are shown on each chip and events sync automatically between monthly and weekly views.
+  Click <em>Save file</em> to download a clean, shareable copy with all your changes saved.
+  Public holidays are indicative — verify against official 2026–2027 government sources.
+</div>
+
+<!-- ── Edit / Add modal ── -->
+
+
+<!-- ── Public suggestion form ── -->
+<div class="ef-backdrop" id="efBackdrop" onclick="efBackdropClick(event)">
+  <div class="ef-modal" id="efModal">
+    <h2>+ Suggest an event for the roadmap</h2>
+    <p class="ef-subtitle">Your submission will be sent to the GoTyme People &amp; Culture team for review.</p>
+    <div class="ef-row"><label for="ef-email">Your email address *</label><input type="email" id="ef-email" placeholder="you@tyme.com" required=""></div>
+    <div class="ef-row"><label for="ef-name">Event name *</label><input type="text" id="ef-name" placeholder="e.g. Regional Leadership Offsite" required=""></div>
+    <div class="ef-row"><label for="ef-desc">Brief description *</label><textarea id="ef-desc" placeholder="What is this event and why does it matter?"></textarea></div>
+    <div class="ef-date-row">
+      <div class="ef-row"><label for="ef-start">Start date *</label><input type="date" id="ef-start" required=""></div>
+      <div class="ef-row"><label for="ef-end">End date</label><input type="date" id="ef-end"></div>
+    </div>
+    <div class="ef-row"><label for="ef-cat">Category *</label>
+      <select id="ef-cat">
+        <option value="">— Select a category —</option>
+        <option value="Company Events / All Hands">Company Events / All Hands</option>
+        <option value="Training">Training</option>
+        <option value="Goal Setting">Goal Setting</option>
+        <option value="Performance Appraisals">Performance Appraisals</option>
+        <option value="Site Visits">Site Visits</option>
+        <option value="Major Product Milestones &amp; Launches">Major Product Milestones &amp; Launches</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="ef-row"><label for="ef-submitted">Submission date</label><input type="text" id="ef-submitted" readonly=""></div>
+    <div class="ef-actions">
+      <button class="btn" onclick="closeEventForm()">Cancel</button>
+      <button class="btn btn-add-event" onclick="submitEventForm()">✉ Submit</button>
+    </div>
+    <div class="ef-success" id="efSuccess">
+      <div class="ef-check">✓</div>
+      <p>Submission sent!</p>
+      <small>Your event suggestion has been emailed to the GoTyme P&amp;C team.<br>They'll be in touch if it's added to the roadmap.</small>
+      <button class="btn btn-primary" onclick="closeEventForm()" style="margin-top:6px">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATE / COLUMN MAPPING TABLES
+// Monthly grid: col index 0=Jul2026 … 11=Jun2027
+// Weekly grids: each quarter-panel has its own week table
+// ═══════════════════════════════════════════════════════════
+
+// Monthly columns: [year, month 0-indexed, col-index]
+// col 0 = Jul 2026, col 11 = Jun 2027
+const MONTHLY_COLS = [
+  {y:2026,m:6},{y:2026,m:7},{y:2026,m:8},
+  {y:2026,m:9},{y:2026,m:10},{y:2026,m:11},
+  {y:2027,m:0},{y:2027,m:1},{y:2027,m:2},
+  {y:2027,m:3},{y:2027,m:4},{y:2027,m:5}
+];
+
+// Weekly grids: each panel id → array of week-start dates (ISO)
+const WEEKLY_PANELS = {
+  'qp-q3': [
+    '2026-07-01','2026-07-08','2026-07-15','2026-07-22',
+    '2026-08-03','2026-08-10','2026-08-17','2026-08-24',
+    '2026-09-01','2026-09-08','2026-09-15','2026-09-22','2026-09-29'
+  ],
+  'qp-q4': [
+    '2026-10-05','2026-10-12','2026-10-19','2026-10-26',
+    '2026-11-02','2026-11-09','2026-11-16','2026-11-23',
+    '2026-12-01','2026-12-08','2026-12-15','2026-12-22','2026-12-29'
+  ],
+  'qp-q1': [
+    '2027-01-04','2027-01-11','2027-01-18','2027-01-25',
+    '2027-02-01','2027-02-08','2027-02-15','2027-02-22',
+    '2027-03-01','2027-03-08','2027-03-15','2027-03-22','2027-03-29'
+  ],
+  'qp-q2': [
+    '2027-04-01','2027-04-07','2027-04-14','2027-04-22',
+    '2027-05-03','2027-05-10','2027-05-17','2027-05-24',
+    '2027-06-01','2027-06-08','2027-06-15','2027-06-22','2027-06-29'
+  ]
+};
+
+// Week-end dates (day before next week starts, or end of quarter)
+const WEEKLY_ENDS = {
+  'qp-q3': [
+    '2026-07-07','2026-07-14','2026-07-21','2026-08-02',
+    '2026-08-09','2026-08-16','2026-08-23','2026-08-31',
+    '2026-09-07','2026-09-14','2026-09-21','2026-09-28','2026-10-04'
+  ],
+  'qp-q4': [
+    '2026-10-11','2026-10-18','2026-10-25','2026-11-01',
+    '2026-11-08','2026-11-15','2026-11-22','2026-11-30',
+    '2026-12-07','2026-12-14','2026-12-21','2026-12-28','2027-01-03'
+  ],
+  'qp-q1': [
+    '2027-01-10','2027-01-17','2027-01-24','2027-01-31',
+    '2027-02-07','2027-02-14','2027-02-21','2027-02-28',
+    '2027-03-07','2027-03-14','2027-03-21','2027-03-28','2027-04-04'
+  ],
+  'qp-q2': [
+    '2027-04-06','2027-04-13','2027-04-21','2027-05-02',
+    '2027-05-09','2027-05-16','2027-05-23','2027-05-31',
+    '2027-06-07','2027-06-14','2027-06-21','2027-06-28','2027-07-05'
+  ]
+};
+
+// ── Utility ──────────────────────────────────────────────
+function parseDate(s){ if(!s)return null; const p=s.split('-'); return new Date(+p[0],+p[1]-1,+p[2]); }
+function fmtShort(s){
+  if(!s)return '';
+  const d=parseDate(s);
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return d.getDate()+' '+months[d.getMonth()];
+}
+function fmtDateLabel(start,end){
+  if(!start)return '';
+  if(!end||start===end)return fmtShort(start);
+  return fmtShort(start)+'–'+fmtShort(end);
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ── Find which monthly column(s) a date range covers ────
+function monthlyColsForRange(startStr,endStr){
+  const s=parseDate(startStr);
+  const e=endStr?parseDate(endStr):s;
+  const cols=[];
+  MONTHLY_COLS.forEach(function(mc,i){
+    const first=new Date(mc.y,mc.m,1);
+    const last=new Date(mc.y,mc.m+1,0);
+    if(s<=last && e>=first) cols.push(i);
+  });
+  return cols;
+}
+
+// ── Find which weekly panel+col(s) a date range covers ──
+function weeklyPlacementsForRange(startStr,endStr){
+  const s=parseDate(startStr);
+  const e=endStr?parseDate(endStr):s;
+  const placements=[]; // [{panelId, cols:[]}]
+  Object.keys(WEEKLY_PANELS).forEach(function(pid){
+    const starts=WEEKLY_PANELS[pid];
+    const ends=WEEKLY_ENDS[pid];
+    const cols=[];
+    starts.forEach(function(ws,i){
+      const we=parseDate(ends[i]);
+      const wsD=parseDate(ws);
+      if(s<=we && e>=wsD) cols.push(i);
+    });
+    if(cols.length) placements.push({panelId:pid,cols:cols});
+  });
+  return placements;
+}
+
+// ── Get the row's lr element in a given grid ─────────────
+function getRowInGrid(grid,rowKey){
+  return grid.querySelector('[data-row="'+rowKey+'"]');
+}
+// ── Get a specific .lc cell by index within an lr row ───
+function getCellByIndex(lr,idx){
+  return lr.querySelectorAll('.lc')[idx];
+}
+
+// ── Build event chip HTML ────────────────────────────────
+function makeChip(txt,cat,tip,dateLabel){
+  let inner=esc(txt);
+  if(dateLabel) inner+='<span class="ev-date">'+esc(dateLabel)+'</span>';
+  inner+='<span class="db">&times;</span>';
+  let tipAttr=tip?(' data-tip="'+esc(tip)+'"'):'';
+  return '<div class="ev '+cat+'"'+tipAttr+'>'+inner+'</div>';
+}
+
+// ── Determine which row key was clicked ──────────────────
+function getRowKey(lc){
+  const lr=lc.closest('[data-row]');
+  return lr?lr.getAttribute('data-row'):null;
+}
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+let em=false, ac=null, acell=null;
+
+// ═══════════════════════════════════════════════════════════
+// VIEW SWITCHING
+// ═══════════════════════════════════════════════════════════
+function switchView(v){
+  document.querySelectorAll('.view-tab').forEach(function(t,i){
+    t.classList.toggle('active',(i===0&&v==='monthly')||(i===1&&v==='weekly'));
+  });
+  document.getElementById('panel-monthly').classList.toggle('active',v==='monthly');
+  document.getElementById('panel-weekly').classList.toggle('active',v==='weekly');
+  document.getElementById('qtabs').classList.toggle('visible',v==='weekly');
+}
+function switchQ(e,q){
+  document.querySelectorAll('.qtab').forEach(function(t){t.classList.remove('active');});
+  e.target.classList.add('active');
+  document.querySelectorAll('.quarter-panel').forEach(function(p){p.classList.remove('qactive');});
+  document.getElementById('qp-'+q).classList.add('qactive');
+}
+document.querySelectorAll('.quarter-panel').forEach(function(p,i){ if(i===0) p.classList.add('qactive'); });
+
+// ═══════════════════════════════════════════════════════════
+// EDIT MODE
+// ═══════════════════════════════════════════════════════════
+function toggleEdit(){
+  em=!em;
+  document.body.classList.toggle('edit-mode',em);
+  document.getElementById('eb').classList.toggle('visible',em);
+  const b=document.getElementById('etb');
+  b.textContent=em?'✓ Done editing':'✏️ Edit mode';
+  b.classList.toggle('active',em);
+}
+
+// ═══════════════════════════════════════════════════════════
+// CLICK HANDLER
+// ═══════════════════════════════════════════════════════════
+document.body.addEventListener('click',function(e){
+  if(!em)return;
+  // Delete button
+  const d=e.target.closest('.db');
+  if(d){ e.stopPropagation(); d.parentElement.remove(); return; }
+  // Add button
+  const a=e.target.closest('.ab');
+  if(a){
+    e.stopPropagation();
+    acell=a.parentElement; ac=null;
+    document.getElementById('mt').textContent='Add event';
+    document.getElementById('mx').value='';
+    document.getElementById('mtip').value='';
+    document.getElementById('mstart').value='';
+    document.getElementById('mend').value='';
+    document.getElementById('mc').value='corp';
+    openM(); return;
+  }
+  // Edit existing event
+  const c=e.target.closest('.ev');
+  if(c){
+    ac=c; acell=null;
+    const tn=[...c.childNodes].find(function(n){return n.nodeType===3;});
+    document.getElementById('mt').textContent='Edit event';
+    document.getElementById('mx').value=tn?tn.textContent.trim():'';
+    document.getElementById('mtip').value=c.dataset.tip||'';
+    document.getElementById('mstart').value=c.dataset.start||'';
+    document.getElementById('mend').value=c.dataset.end||'';
+    const cats=['corp','train','goals','perf','visit','prod','other','ph'];
+    document.getElementById('mc').value=cats.find(function(x){return c.classList.contains(x);})||'corp';
+    openM();
+  }
+});
+
+function openM(){
+  document.getElementById('mb').classList.add('open');
+  setTimeout(function(){document.getElementById('mx').focus();},50);
+}
+function closeM(){
+  document.getElementById('mb').classList.remove('open');
+  ac=null; acell=null;
+}
+document.getElementById('mb').addEventListener('click',function(e){
+  if(e.target===e.currentTarget) closeM();
+});
+document.getElementById('mx').addEventListener('keydown',function(e){
+  if(e.key==='Enter') saveM();
+  if(e.key==='Escape') closeM();
+});
+
+// ═══════════════════════════════════════════════════════════
+// SAVE EVENT — with cross-view sync
+// ═══════════════════════════════════════════════════════════
+function saveM(){
+  const txt=document.getElementById('mx').value.trim();
+  if(!txt) return;
+  const cat=document.getElementById('mc').value;
+  const tip=document.getElementById('mtip').value.trim();
+  const startVal=document.getElementById('mstart').value;
+  const endVal=document.getElementById('mend').value;
+  const dateLabel=fmtDateLabel(startVal,endVal);
+
+  if(ac){
+    // ── Editing an existing chip ──────────────────────────
+    // Update the chip in place
+    ac.className='ev '+cat;
+    tip?ac.setAttribute('data-tip',tip):ac.removeAttribute('data-tip');
+    startVal?ac.setAttribute('data-start',startVal):ac.removeAttribute('data-start');
+    endVal?ac.setAttribute('data-end',endVal):ac.removeAttribute('data-end');
+    let inner=esc(txt);
+    if(dateLabel) inner+='<span class="ev-date">'+esc(dateLabel)+'</span>';
+    inner+='<span class="db">&times;</span>';
+    ac.innerHTML=inner;
+    closeM();
+    return;
+  }
+
+  if(!acell){ closeM(); return; }
+
+  // ── Adding a new event ────────────────────────────────
+  // Determine which grid and row we're in
+  const inMonthly=!!acell.closest('#panel-monthly');
+  const inWeekly=!!acell.closest('#panel-weekly');
+  const rowKey=getRowKey(acell);
+
+  if(!rowKey || (!startVal)){
+    // No dates → just drop chip in the clicked cell only (legacy behaviour)
+    const ab=acell.querySelector('.ab');
+    const ch=document.createElement('div');
+    ch.className='ev '+cat;
+    if(tip) ch.setAttribute('data-tip',tip);
+    ch.innerHTML=esc(txt)+'<span class="db">&times;</span>';
+    acell.insertBefore(ch,ab);
+    closeM(); return;
+  }
+
+  // ── Place in monthly view ─────────────────────────────
+  const monthlyGrid=document.getElementById('mgrid');
+  const mCols=monthlyColsForRange(startVal,endVal);
+  mCols.forEach(function(ci){
+    const lr=getRowInGrid(monthlyGrid,rowKey);
+    if(!lr) return;
+    const cell=getCellByIndex(lr,ci);
+    if(!cell) return;
+    const ab=cell.querySelector('.ab');
+    const ch=document.createElement('div');
+    ch.className='ev '+cat;
+    if(tip) ch.setAttribute('data-tip',tip);
+    ch.setAttribute('data-start',startVal);
+    if(endVal) ch.setAttribute('data-end',endVal);
+    ch.innerHTML=makeChip(txt,cat,tip,dateLabel).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'');
+    cell.insertBefore(ch,ab);
+  });
+
+  // ── Place in weekly views ─────────────────────────────
+  const placements=weeklyPlacementsForRange(startVal,endVal);
+  placements.forEach(function(pl){
+    const panel=document.getElementById(pl.panelId);
+    if(!panel) return;
+    const grids=panel.querySelectorAll('.timeline-grid');
+    grids.forEach(function(grid){
+      const lr=getRowInGrid(grid,rowKey);
+      if(!lr) return;
+      pl.cols.forEach(function(ci){
+        const cell=getCellByIndex(lr,ci);
+        if(!cell) return;
+        const ab=cell.querySelector('.ab');
+        const ch=document.createElement('div');
+        ch.className='ev '+cat;
+        if(tip) ch.setAttribute('data-tip',tip);
+        ch.setAttribute('data-start',startVal);
+        if(endVal) ch.setAttribute('data-end',endVal);
+        ch.innerHTML=makeChip(txt,cat,tip,dateLabel).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'');
+        cell.insertBefore(ch,ab);
+      });
+    });
+  });
+
+  closeM();
+}
+
+// ═══════════════════════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════════════════════
+function exportHTML(){
+  const cl=document.documentElement.cloneNode(true);
+  cl.querySelector('#eb').remove();
+  cl.querySelector('#mb').remove();
+  cl.querySelectorAll('.db').forEach(function(el){el.remove();});
+  cl.querySelectorAll('.ab').forEach(function(el){el.remove();});
+  cl.querySelector('body').classList.remove('edit-mode');
+  const b=cl.querySelector('#etb'); if(b) b.textContent='✏️ Edit mode';
+  cl.querySelectorAll('.quarter-panel').forEach(function(p,i){
+    p.classList.remove('qactive'); if(i===0) p.classList.add('qactive');
+  });
+  const blob=new Blob(['<!DOCTYPE html>\n'+cl.outerHTML],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='gotyme_roadmap_2026_2027.html';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+
+// ═══════════════════════════════════════════════════════════
+// PUBLIC SUGGESTION FORM
+// ═══════════════════════════════════════════════════════════
+function openEventForm(){
+  var today=new Date();
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('ef-submitted').value=
+    String(today.getDate()).padStart(2,'0')+' '+months[today.getMonth()]+' '+today.getFullYear();
+  document.getElementById('efSuccess').style.display='none';
+  document.getElementById('efBackdrop').classList.add('open');
+  setTimeout(function(){document.getElementById('ef-email').focus();},60);
+}
+function closeEventForm(){
+  document.getElementById('efBackdrop').classList.remove('open');
+  ['ef-email','ef-name','ef-desc','ef-start','ef-end'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('ef-cat').value='';
+  document.getElementById('efSuccess').style.display='none';
+}
+function efBackdropClick(e){
+  if(e.target===document.getElementById('efBackdrop')) closeEventForm();
+}
+function submitEventForm(){
+  var email=document.getElementById('ef-email').value.trim();
+  var name=document.getElementById('ef-name').value.trim();
+  var desc=document.getElementById('ef-desc').value.trim();
+  var start=document.getElementById('ef-start').value;
+  var end=document.getElementById('ef-end').value;
+  var cat=document.getElementById('ef-cat').value;
+  var submitted=document.getElementById('ef-submitted').value;
+  if(!email||!name||!desc||!start||!cat){
+    alert('Please complete all required fields (marked *).'); return;
+  }
+  var body='New event suggestion for the GoTyme Roadmap%0A%0A'
+    +'Submitted by: '+encodeURIComponent(email)+'%0A'
+    +'Event name: '+encodeURIComponent(name)+'%0A'
+    +'Description: '+encodeURIComponent(desc)+'%0A'
+    +'Start date: '+encodeURIComponent(start)+'%0A'
+    +(end?'End date: '+encodeURIComponent(end)+'%0A':'')
+    +'Category: '+encodeURIComponent(cat)+'%0A'
+    +'Submission date: '+encodeURIComponent(submitted);
+  var subject=encodeURIComponent('Roadmap Event Suggestion: '+name);
+  window.location.href='mailto:jean.brown@tyme.com?subject='+subject+'&body='+body;
+  setTimeout(function(){document.getElementById('efSuccess').style.display='flex';},800);
+}
+</script>
+
+
+</body></html>
